@@ -27,8 +27,11 @@
 
 // EXAMPLE: amsf.github.io custom appearance
 :root {
-  --code-color-h: calc(var(--link-color-h) + 10);
-  --code-color-s: calc(var(--link-color-s) * .2 + 40%);
+  --text-color-h: 25;
+  --link-color-h: 25;
+
+  --code-color-h: calc(var(--link-color-h) + 5);
+  --code-color-s: calc(var(--link-color-s) * .2 + 45%);
 }
 
 .content .sub-title {

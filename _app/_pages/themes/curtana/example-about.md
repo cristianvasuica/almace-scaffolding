@@ -1,7 +1,7 @@
 ---
 layout: page
 title: About
-permalink: /example-about/
+permalink: /about/
 desc: 關於・について・Introduction
 hidden: true
 ---
