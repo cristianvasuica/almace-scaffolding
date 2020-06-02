@@ -11,11 +11,44 @@ Today we will check on Interfaces Default implementation. This feature is availa
 
 Which problems are solved by this feature
 
-Lets suppose that you have written a nice API with some public interfaces and released it to the world. Version 1.0 was highly appreaciated and users have started to make use of it, but as it happens in software development you need to extend your code to support newly requested functionalities. That's great! But what happens when with the new code changes you are forced to do changes to the publically exposed interfaces?
+Lets suppose that you have written a nice API with some public interfaces and released it to the world. Version 1.0 was highly appreaciated and users have started to make use of it, but as it happens in software development you need to extend your code to support newly requested functionalities. That's great! But what happens when, with the new code changes you are forced to do changes to the publically exposed interfaces?
 Well if the users of your API have just referenced your interfaces, but have not implemented them they will not be affected by any addition of new features.
 But what if they created their own types implementing your interfaces?
 Well, prior to C# 8.0 that would have ended in compilation errors. Now, when it is the case to extend your interfaces and you fear of this situation, you can also provide a default implementation.
 //add some code here
+ public interface IOrder
+    {
+        //version 1
+        ICustomer Customer { get; }
+        IEnumerable<IProduct> Products { get; }
+        decimal TotalCost { get; }
+
+        //version 2
+        //newly added functionality with a default implementation
+        public void ApplyVoucher(IVoucher voucher) => DefaultApplyVoucher(this, voucher);
+        
+        protected static void DefaultApplyVoucher(IOrder order, IVoucher voucher)
+        {
+            //check voucher availability
+            //apply voucher
+            return;
+        }
+    }
+As it can be seen in the code example above, version 1 of the IOrder interface contained no Voucher functionalities. This was added in version 2 and there was provided a default implementation as well. Problem solved now, you can add new methods in your publically exposed interfaces.
+
+But, what if the consumers of your API have implemented your IOrder interface and in their code they already have a method with the same name as the one you just added, "ApplyVoucher"?
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ## The Problem
